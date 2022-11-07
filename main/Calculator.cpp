@@ -1,12 +1,15 @@
 #include "Calculator.h"
 
 void Calculator::mainLogic() {
-
-  if (currentSymbol() >= 0 && currentSymbol() <= 9) {
-    IV28.screenPrint(currentSymbol(), 0);
+  Serial.println("mainLogic in");
+  Serial.println("currentSymbol");
+  Serial.println(BM23.currentSymbol());
+  
+  if (BM23.currentSymbol() >= 0 && BM23.currentSymbol() <= 9) {
+    IV28.screenPrint(BM23.currentSymbol(), 0);
   }
 
-  switch (currentSymbol()) {
+  switch (BM23.currentSymbol()) {
     case '/':
       currentOperation = '/';
       if (userValueRegA == 0) {
@@ -82,7 +85,7 @@ void Calculator::mainLogic() {
           }
           break;
         case '*':
-          templateValueCalculation = calc.multiplication(userValueRegA, userValueRegB, 50);
+          templateValueCalculation = calc.multiplication(userValueRegA, userValueRegB, 100);
           IV28.writeNumber(templateValueCalculation);
           userValueRegA = 0;
           userValueRegB = 0;

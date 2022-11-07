@@ -1,6 +1,5 @@
-#include "HC165_2.h"
 #include "KeyBoard.h"
-
+#include "HC165_2.h"
 
 int8_t Keyboard::currentSymbol() {
   int8_t tmp = -1;

@@ -1,3 +1,5 @@
+#pragma once
+
 #include "KeyBoard.h" // Класс работы с клавиатурой 5х5 на сдвиговых регистрах паралельно - последовательного преобразования hc165
 #include "DynamicIndication.h" // Класс работы с вакумным дисплеем IV28 на регистрах последовательно - паралельного преобразования hc595
 #include "CalcRelay.h" // Ядро вычисления на реле
@@ -6,7 +8,7 @@
 #include "HC595_4.h" // Глобальный объект класса для работы с hc595
 #include <Vector.h> // Класс костыль от "Peter", который имеет подобие std::vector только для ардуино(так как std нет в arduino), использует статическую память а не динамическую 
 
-class Calculator: private Keyboard, private DynamicIndication, private RelayCalc {
+class Calculator {
 
   public:
     Calculator() {};
@@ -16,9 +18,10 @@ class Calculator: private Keyboard, private DynamicIndication, private RelayCalc
       if (HC165::shift.update() && millis() - btnTimer > 100) {
         btnTimer = millis();
         mainLogic();
+        Serial.println("Tick in");
       }
       IV28.refScreen();
-  }
+    }
 
   private:
 

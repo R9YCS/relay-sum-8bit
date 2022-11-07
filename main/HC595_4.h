@@ -1,3 +1,4 @@
+#pragma once
 #include <GyverHC595.h>
 
 namespace HC595
