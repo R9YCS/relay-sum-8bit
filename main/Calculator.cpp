@@ -1,13 +1,5 @@
 #include "Calculator.h"
 
-// namespace VECTOR{
-  // const int ELEMENT_COUNT_MAX = 5;
-  // typedef Vector<int> Elements;
-  // static int storage_array[ELEMENT_COUNT_MAX];
-  // static Elements vector;
-  // vector.setStorage(storage_array);
-// }
-
 void Calculator::mainLogic() {
 
   if (currentSymbol() >= 0 && currentSymbol() <= 9) {
@@ -17,37 +9,37 @@ void Calculator::mainLogic() {
   switch (currentSymbol()) {
     case '/':
       currentOperation = '/';
-      if (multA == 0) {
-        multA = IV28.returnNumber();
+      if (userValueRegA == 0) {
+        userValueRegA = IV28.returnNumber();
       } else {
-        multB = IV28.returnNumber();
+        userValueRegB = IV28.returnNumber();
       }
       break;
 
     case '*':
       currentOperation = '*';
-      if (multA == 0) {
-        multA = IV28.returnNumber();
+      if (userValueRegA == 0) {
+        userValueRegA = IV28.returnNumber();
       } else {
-        multB = IV28.returnNumber();
+        userValueRegB = IV28.returnNumber();
       }
       break;
 
     case '-':
       currentOperation = '-';
-      if (multA == 0) {
-        multA = IV28.returnNumber();
+      if (userValueRegA == 0) {
+        userValueRegA = IV28.returnNumber();
       } else {
-        multB = IV28.returnNumber();
+        userValueRegB = IV28.returnNumber();
       }
       break;
 
     case '+':
       currentOperation = '+';
-      if (multA == 0) {
-        multA = IV28.returnNumber();
+      if (userValueRegA == 0) {
+        userValueRegA = IV28.returnNumber();
       } else {
-        multB = IV28.returnNumber();
+        userValueRegB = IV28.returnNumber();
       }
       break;
 
@@ -57,56 +49,55 @@ void Calculator::mainLogic() {
       break;
 
     case '%':
-      if (multA != 0) {
-        float tmpP = calc.division(multA, 10, 1, 50);
-        multB = IV28.returnNumber();
-        // multB = calc.multiplication(multB, tmpP, 50);
-        IV28.writeNumber((float)multB * tmpP / 10);
+      if (userValueRegA != 0) {
+        float tmpP = calc.division(userValueRegA, 10, 1, 50);
+        userValueRegB = IV28.returnNumber();
+        // userValueRegB = calc.multiplication(userValueRegB, tmpP, 50);
+        IV28.writeNumber((float)userValueRegB * tmpP / 10);
       }
       break;
 
     case 'r':
-      if (multA != 0) {
-        uint16_t tmpR = multA;
-        multA = IV28.returnNumber();
-        multB = tmpR;
-        IV28.writeNumber(multB);
+      if (userValueRegA != 0) {
+        uint16_t tmpR = userValueRegA;
+        userValueRegA = IV28.returnNumber();
+        userValueRegB = tmpR;
+        IV28.writeNumber(userValueRegB);
       }
       break;
 
     case '=':
-      if (multA != 0) {
-        multB = IV28.returnNumber();
+      if (userValueRegA != 0) {
+        userValueRegB = IV28.returnNumber();
       }
-      int32_t tmp123;
       switch (currentOperation) {
         case '/':
-          if (multA != 0 && multB != 0) {
-            tmp123 = calc.division(multA, multB, 1, 50);
-            IV28.writeNumber(tmp123);
-            multA = 0;
-            multB = 0;
+          if (userValueRegA != 0 && userValueRegB != 0) {
+            templateValueCalculation = calc.division(userValueRegA, userValueRegB, 1, 50);
+            IV28.writeNumber(templateValueCalculation);
+            userValueRegA = 0;
+            userValueRegB = 0;
           } else {
             IV28.err();
           }
           break;
         case '*':
-          tmp123 = calc.multiplication(multA, multB, 50);
-          IV28.writeNumber(tmp123);
-          multA = 0;
-          multB = 0;
+          templateValueCalculation = calc.multiplication(userValueRegA, userValueRegB, 50);
+          IV28.writeNumber(templateValueCalculation);
+          userValueRegA = 0;
+          userValueRegB = 0;
           break;
         case '-':
-          tmp123 = calc.Subtraction(multA, multB, 50);
-          IV28.writeNumber(tmp123);
-          multA = 0;
-          multB = 0;
+          templateValueCalculation = calc.Subtraction(userValueRegA, userValueRegB, 50);
+          IV28.writeNumber(templateValueCalculation);
+          userValueRegA = 0;
+          userValueRegB = 0;
           break;
         case '+':
-          tmp123 = calc.CalcSum(multA, multB, 50);
-          IV28.writeNumber(tmp123);
-          multA = 0;
-          multB = 0;
+          templateValueCalculation = calc.CalcSum(userValueRegA, userValueRegB, 50);
+          IV28.writeNumber(templateValueCalculation);
+          userValueRegA = 0;
+          userValueRegB = 0;
           break;
       }
       break;

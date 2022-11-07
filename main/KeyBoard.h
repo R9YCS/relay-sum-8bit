@@ -6,9 +6,9 @@ class Keyboard {
 
     public:
     
-    Keyboard() {};
-    ~Keyboard() {};
-    int8_t currentSymbol();
+      Keyboard() {};
+      ~Keyboard() {};
+      int8_t currentSymbol();
 
     private:
     
