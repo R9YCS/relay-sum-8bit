@@ -76,8 +76,8 @@ void Calculator::mainLogic() {
       switch (currentOperation) {
         case '/':
           if (userValueRegA != 0 && userValueRegB != 0) {
-            templateValueCalculation = calc.division(userValueRegA, userValueRegB, 1, 50);
-            IV28.writeNumber(templateValueCalculation);
+            float templateValueCalculationFloat = calc.division(userValueRegA, userValueRegB, 1, 50);
+            IV28.writeNumberF(templateValueCalculationFloat);
             userValueRegA = 0;
             userValueRegB = 0;
           } else {
@@ -85,7 +85,7 @@ void Calculator::mainLogic() {
           }
           break;
         case '*':
-          templateValueCalculation = calc.multiplication(userValueRegA, userValueRegB, 100);
+          templateValueCalculation = calc.multiplication(userValueRegA, userValueRegB, 50);
           IV28.writeNumber(templateValueCalculation);
           userValueRegA = 0;
           userValueRegB = 0;
